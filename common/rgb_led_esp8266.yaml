@@ -1,0 +1,20 @@
+output:
+  - platform: esp8266_pwm
+    id: led_red
+    pin: ${led_pin_red}
+    max_power: 1
+  - platform: esp8266_pwm
+    id: led_green
+    pin: ${led_pin_green}
+    max_power: 0.011  # = 0.2^2.8
+  - platform: esp8266_pwm
+    id: led_blue
+    pin: ${led_pin_blue}
+    max_power: 0.722  # = 0.89^2.8
+
+light:
+  - platform: rgb
+    id: led_rgb
+    red: led_red
+    green: led_green
+    blue: led_blue

@@ -1,0 +1,109 @@
+sensor:
+  - platform: template
+    name: "${node_name} PM2.5 24h average"
+    id: pm2_5_avg_24h
+    icon: mdi:chemical-weapon
+    unit_of_measurement: µg/m³
+    lambda: |-
+      return id(pm2_5_value).state;
+    update_interval: 60s
+    filters:
+      - sliding_window_moving_average:
+          window_size: 1440
+          send_every: 1
+    on_value:
+      then:
+        - script.execute: update_aqi
+  - platform: template
+    name: "${node_name} PM10 24h average"
+    id: pm10_avg_24h
+    icon: mdi:chemical-weapon
+    unit_of_measurement: µg/m³
+    lambda: |-
+      return id(pm10_value).state;
+    update_interval: 60s
+    filters:
+      - sliding_window_moving_average:
+          window_size: 1440  # = 24 hours x 60 minutes
+          send_every: 1
+    on_value:
+      then:
+        - script.execute: update_aqi
+
+text_sensor:
+  - platform: template
+    name: "${node_name} Air Quality Index"
+    id: aqi
+    icon: mdi:air-filter
+
+script:
+  - id: update_aqi
+    mode: restart
+    then:
+      # Bad if at least one of the sensor values is bad
+      - if:
+          condition:
+            or:
+              - sensor.in_range:
+                  id: co2_value
+                  above: ${aqi_co2_max_acceptable}
+              - sensor.in_range:
+                  id: pm2_5_avg_24h
+                  above: ${aqi_pm2_5_avg_24h_max_acceptable}
+              - sensor.in_range:
+                  id: pm10_avg_24h
+                  above: ${aqi_pm10_avg_24h_max_acceptable}
+          then:
+            - text_sensor.template.publish:
+                id: aqi
+                state: ${aqi_message_bad}
+            - if:
+                condition:
+                  binary_sensor.is_on: co2_calibrated
+                then:
+                  - light.turn_on:
+                      id: led_rgb
+                      red: 100%
+                      green: 0%
+                      blue: 0%
+          else:
+            # Acceptable if at least one of the sensor values is acceptable
+            - if:
+                condition:
+                  or:
+                    - sensor.in_range:
+                        id: co2_value
+                        above: ${aqi_co2_max_good}
+                    - sensor.in_range:
+                        id: pm2_5_avg_24h
+                        above: ${aqi_pm2_5_avg_24h_max_good}
+                    - sensor.in_range:
+                        id: pm10_avg_24h
+                        above: ${aqi_pm10_avg_24h_max_good}
+                then:
+                  - text_sensor.template.publish:
+                      id: aqi
+                      state: ${aqi_message_acceptable}
+                  - if:
+                      condition:
+                        binary_sensor.is_on: co2_calibrated
+                      then:
+                        - light.turn_on:
+                            id: led_rgb
+                            red: 100%
+                            green: 100%
+                            blue: 0%
+                else:
+                  # Otherwise good (all of the sensor values are good)
+                  - text_sensor.template.publish:
+                      id: aqi
+                      state: ${aqi_message_good}
+                  - if:
+                      condition:
+                        binary_sensor.is_on: co2_calibrated
+                      then:
+                        - light.turn_on:
+                            id: led_rgb
+                            red: 0%
+                            green: 100%
+                            blue: 0%

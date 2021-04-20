@@ -1,0 +1,30 @@
+substitutions:
+  node_name: esp8266_example
+  node_platform: ESP8266
+  node_board: nodemcuv2
+  i2c_pin_scl: D1
+  i2c_pin_sda: D2
+  bme280_i2c_address: "0x76"
+  bme280_update_interval: 60s
+  bme280_offset_temperature: "0"
+  mhz19b_pin_tx: D4
+  mhz19b_pin_rx: D5
+  mhz19b_update_interval: 60s
+  mhz19b_calibration_interval: 30d
+  sds011_pin_tx: D3
+  sds011_pin_rx: D6
+  sds011_update_interval: 5min
+  led_pin_red: D7
+  led_pin_green: D8
+  led_pin_blue: TX
+
+packages:
+  base: !include common/base.yaml
+  bme280: !include common/bme280.yaml
+  mhz19b: !include common/mh-z19b.yaml
+  sds011: !include common/sds011.yaml
+  rgb: !include common/rgb_led_esp8266.yaml
+  aqi: !include common/aqi.yaml
+
+logger:
+  baud_rate: 0

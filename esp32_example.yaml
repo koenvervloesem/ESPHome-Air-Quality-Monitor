@@ -1,0 +1,35 @@
+substitutions:
+  node_name: esp32_example
+  node_platform: ESP32
+  node_board: esp32dev
+  i2c_pin_scl: GPIO21
+  i2c_pin_sda: GPIO22
+  bme280_i2c_address: "0x76"
+  bme280_update_interval: 60s
+  bme280_offset_temperature: "0"
+  mhz19b_pin_tx: GPIO35
+  mhz19b_pin_rx: GPIO32
+  mhz19b_update_interval: 60s
+  mhz19b_calibration_interval: 30d
+  sds011_pin_tx: GPIO34
+  sds011_pin_rx: GPIO33
+  sds011_update_interval: 5min
+  led_pin_red: GPIO5
+  led_pin_green: GPIO17
+  led_pin_blue: GPIO16
+
+# See https://github.com/esphome/feature-requests/issues/609
+esphome:
+  platformio_options:
+    platform: espressif32
+    board: az-delivery-devkit-v4
+    board_build.mcu: esp32
+    board_build.f_cpu: 240000000L
+
+packages:
+  base: !include common/base.yaml
+  bme280: !include common/bme280.yaml
+  mhz19b: !include common/mh-z19b.yaml
+  sds011: !include common/sds011.yaml
+  rgb: !include common/rgb_led_esp32.yaml
+  aqi: !include common/aqi.yaml

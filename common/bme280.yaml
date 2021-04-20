@@ -1,0 +1,19 @@
+i2c:
+  sda: ${i2c_pin_sda}
+  scl: ${i2c_pin_scl}
+
+sensor:
+  - platform: bme280
+    temperature:
+      id: t_value
+      name: "${node_name} temperature"
+      filters:
+        - offset: ${bme280_offset_temperature}
+    humidity:
+      id: h_value
+      name: "${node_name} humidity"
+    pressure:
+      id: p_value
+      name: "${node_name} pressure"
+    address: ${bme280_i2c_address}
+    update_interval: ${bme280_update_interval}

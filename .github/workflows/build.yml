@@ -1,0 +1,31 @@
+---
+name: Build
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/**'
+      - 'common/**'
+      - '*_example.yaml'
+  push:
+    paths:
+      - '.github/workflows/**'
+      - 'common/**'
+      - '*_example.yaml'
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Install setuptools
+        run: sudo apt install python3-setuptools
+      - name: Install requirements
+        run: sudo make requirements
+      - name: Lint YAML files
+        run: |
+          cp common/secrets.yaml.example common/secrets.yaml
+          make lint
+      - name: Build code
+        run: make build

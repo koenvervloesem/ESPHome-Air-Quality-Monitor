@@ -1,0 +1,16 @@
+uart:
+  - id: uart_sds011
+    rx_pin: ${sds011_pin_tx}
+    tx_pin: ${sds011_pin_rx}
+    baud_rate: 9600
+
+sensor:
+  - platform: sds011
+    uart_id: uart_sds011
+    pm_2_5:
+      id: pm2_5_value
+      name: "${node_name} PM2.5"
+    pm_10_0:
+      id: pm10_value
+      name: "${node_name} PM10"
+    update_interval: ${sds011_update_interval}

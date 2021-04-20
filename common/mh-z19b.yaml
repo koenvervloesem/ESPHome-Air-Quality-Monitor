@@ -1,0 +1,73 @@
+uart:
+  - id: uart_mhz19b
+    rx_pin: ${mhz19b_pin_tx}
+    tx_pin: ${mhz19b_pin_rx}
+    baud_rate: 9600
+
+sensor:
+  - platform: mhz19
+    id: co2_sensor
+    uart_id: uart_mhz19b
+    co2:
+      name: "${node_name} CO₂"
+      id: co2_value
+      on_value:
+        then:
+          - script.execute: update_aqi
+    update_interval: ${mhz19b_update_interval}
+    automatic_baseline_calibration: false
+
+# Show the user whether the sensor has been calibrated yet
+binary_sensor:
+  - platform: template
+    name: "${node_name} CO₂ sensor calibrated"
+    id: co2_calibrated
+    on_press:
+      then:
+        - light.turn_off:
+            id: led_rgb
+    on_release:
+      then:
+        - light.turn_on:
+            id: led_rgb
+            brightness: 100%
+            red: 0%
+            green: 0%
+            blue: 100%
+
+# The sensor starts in an uncalibrated state after boot
+esphome:
+  on_boot:
+    priority: 500
+    then:
+      - binary_sensor.template.publish:
+          id: co2_calibrated
+          state: OFF
+
+# The user should calibrate the sensor every month
+interval:
+  - interval: ${mhz19b_calibration_interval}
+    then:
+      - binary_sensor.template.publish:
+          id: co2_calibrated
+          state: OFF
+
+switch:
+  - platform: template
+    name: "${node_name} calibrate CO₂ sensor"
+    id: co2_calibrate
+    optimistic: true
+    on_turn_on:
+      then:
+        - mhz19.calibrate_zero: co2_sensor
+        - light.turn_on:
+            id: led_rgb
+            brightness: 100%
+            red: 100%
+            green: 0%
+            blue: 100%
+        - delay: 20min
+        - switch.turn_off: co2_calibrate
+        - binary_sensor.template.publish:
+            id: co2_calibrated
+            state: ON
