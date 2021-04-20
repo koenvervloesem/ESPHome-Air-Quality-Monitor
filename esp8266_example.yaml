@@ -1,3 +1,4 @@
+# Example configuration for a NodeMCU v2 ESP8266 development board
 substitutions:
   node_name: esp8266_example
   node_platform: ESP8266
