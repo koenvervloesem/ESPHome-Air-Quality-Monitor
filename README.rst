@@ -61,11 +61,11 @@ Here are the connections to the pins of these boards:
 +--------------+-----------------+------------------+
 | SDS011 RX    | D6              | GPIO33           |
 +--------------+-----------------+------------------+
-| LED rood     | D7              | GPIO5            |
+| LED red      | D7              | GPIO5            |
 +--------------+-----------------+------------------+
-| LED groen    | D8              | GPIO17           |
+| LED green    | D8              | GPIO17           |
 +--------------+-----------------+------------------+
-| LED blauw    | TX              | GPIO16           |
+| LED blue     | TX              | GPIO16           |
 +--------------+-----------------+------------------+
 
 Make sure to connect the power and ground connections too. The BME280 needs 3.3 V, the MH-Z19B and SDS011 need 5 V.

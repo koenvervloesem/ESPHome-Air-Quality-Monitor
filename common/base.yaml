@@ -5,9 +5,9 @@ substitutions:
   aqi_pm2_5_avg_24h_max_acceptable: "25"  # WHO 2006
   aqi_pm10_avg_24h_max_good: "25"
   aqi_pm10_avg_24h_max_acceptable: "50"  # WHO 2006
-  aqi_message_bad: "Slecht"
-  aqi_message_acceptable: "Aanvaardbaar"
-  aqi_message_good: "Goed"
+  aqi_message_bad: "Bad"
+  aqi_message_acceptable: "Acceptable"
+  aqi_message_good: "Good"
 
 esphome:
   name: ${node_name}
