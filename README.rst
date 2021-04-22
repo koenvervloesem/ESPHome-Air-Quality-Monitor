@@ -7,7 +7,7 @@ ESPHome Air Quality Monitor
    :alt: Continuous integration
 
 .. image:: https://img.shields.io/github/license/koenvervloesem/ESPHome-Air-Quality-Monitor.svg
-   :target: https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/master/LICENSE
+   :target: https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/LICENSE
    :alt: License
 
 This `ESPHome <https://esphome.io/>`_ configuration builds firmware for a DIY indoor air quality monitor. It monitors:
