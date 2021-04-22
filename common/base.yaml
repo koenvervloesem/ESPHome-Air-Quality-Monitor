@@ -1,3 +1,20 @@
+# Base configuration for all air quality monitor nodes
+#
+# Used substitutions:
+#
+# - node_name: name of the device
+# - node_platform: platform of the device
+# - node_board: board of the device
+#
+# Used secrets:
+#
+# - wifi_ssid: SSID of the Wi-Fi network
+# - wifi_password: password of the Wi-Fi network
+# - wifi_ap_password: password of the fallback hotspot
+# - api_password: API password
+# - ota_password: OTA password
+
+# These are the AQI threshold values and messages. Adapt to your needs.
 substitutions:
   aqi_co2_max_good: "800"
   aqi_co2_max_acceptable: "1200"

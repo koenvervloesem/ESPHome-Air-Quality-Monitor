@@ -1,3 +1,19 @@
+# Configuration for the RGB LED on the ESP32
+#
+# Used substitutions:
+#
+# - led_pin_red: pin connected to the red LED
+# - led_pin_green: pin connected to the green LED
+# - led_pin_blue: pin connected to the blue LED
+#
+# IDs used outside this file:
+#
+# - led_rgb: the RGB light
+
+# The red, green and blue components don't have the same brightness.
+# This takes into account:
+# - the different current through each component
+# - the common gamma correction (2.8)
 output:
   - platform: ledc
     id: led_red

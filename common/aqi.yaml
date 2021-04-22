@@ -1,3 +1,23 @@
+# Compute an Air Quality Index (AQI) based on the sensor values.
+#
+# Used substitutions:
+#
+# - aqi_message_good: message shown for good air quality
+# - aqi_message_acceptable: message shown for acceptable air quality
+# - aqi_message_bad: message shown for bad air quality
+# - aqi_co2_max_good: threshold for good CO₂ concentrations
+# - aqi_co2_max_acceptable: threshold for acceptable CO₂ concentrations
+# - aqi_pm2_5_avg_24h_max_good: threshold for good 24h average PM2.5
+# - aqi_pm2_5_avg_24h_max_acceptable: threshold for acceptable 24h average PM2.5
+# - aqi_pm10_avg_24h_max_good: threshold for good 24h average PM10
+# - aqi_pm10_avg_24h_max_acceptable: threshold for acceptable 24h average PM10
+# - node_name: name of the device
+#
+# IDs used outside this file:
+#
+# - update_aqi: script to update the AQI
+
+# The WHO guidelines work with 24-hour averages of the PM2.5 and PM10 sensors
 sensor:
   - platform: template
     name: "${node_name} PM2.5 24h average"
@@ -9,7 +29,7 @@ sensor:
     update_interval: 60s
     filters:
       - sliding_window_moving_average:
-          window_size: 1440
+          window_size: 1440  # = 24 hours x 60 minutes
           send_every: 1
     on_value:
       then:
@@ -30,12 +50,14 @@ sensor:
       then:
         - script.execute: update_aqi
 
+# A textual presentation of the AQI: good, acceptable, bad
 text_sensor:
   - platform: template
     name: "${node_name} Air Quality Index"
     id: aqi
     icon: mdi:air-filter
 
+# This script is called on every update of the relevant sensor values.
 script:
   - id: update_aqi
     mode: restart

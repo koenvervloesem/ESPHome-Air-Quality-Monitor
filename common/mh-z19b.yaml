@@ -1,3 +1,18 @@
+# Configuration for the MH-Z19B CO₂ sensor
+#
+# Used substitutions:
+#
+# - mhz19b_pin_tx: pin connected to the TX pin of the sensor
+# - mhz19b_pin_rx: pin connected to the RX pin of the sensor
+# - mhz19b_update_interval: update interval of the sensor
+# - mhz19b_calibration_interval: calibration interval of the sensor
+# - node_name: name of the device
+#
+# IDs used outside this file:
+#
+# - co2_value: the CO₂ concentration measured by the sensor
+# - co2_calibrated: the calibration state of the sensor
+
 uart:
   - id: uart_mhz19b
     rx_pin: ${mhz19b_pin_tx}
@@ -44,7 +59,7 @@ esphome:
           id: co2_calibrated
           state: OFF
 
-# The user should calibrate the sensor every month
+# Warn when the calibration interval has passed.
 interval:
   - interval: ${mhz19b_calibration_interval}
     then:
@@ -52,6 +67,7 @@ interval:
           id: co2_calibrated
           state: OFF
 
+# Switch to calibrate the sensor from within Home Assistant.
 switch:
   - platform: template
     name: "${node_name} calibrate CO₂ sensor"

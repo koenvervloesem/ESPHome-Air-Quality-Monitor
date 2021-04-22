@@ -1,3 +1,14 @@
+# Configuration for the BME280 temperature, humidity and pressure sensor
+#
+# Used substitutions:
+#
+# - i2c_pin_sda: SDA pin of the I²C bus for this sensor
+# - i2c_pin_scl: SCL pin of the I²C bus for this sensor
+# - bme280_i2c_address: I³c address of the sensor
+# - bme280_update_interval: update interval of the sensor
+# - bme280_offset_temperature: offset of the temperature, e.g. "-1"
+# - node_name: name of the device
+
 i2c:
   sda: ${i2c_pin_sda}
   scl: ${i2c_pin_scl}

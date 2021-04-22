@@ -1,3 +1,17 @@
+# Configuration for the SDS011 PM sensor
+#
+# Used substitutions:
+#
+# - sds011_pin_tx: pin connected to the TX pin of the sensor
+# - sds011_pin_rx: pin connected to the RX pin of the sensor
+# - sds011_update_interval: update interval of the sensor
+# - node_name: name of the device
+#
+# IDs used outside this file:
+#
+# - pm2_5_value: PM2.5 concentration
+# - pm10_value: PM10 concentration
+
 uart:
   - id: uart_sds011
     rx_pin: ${sds011_pin_tx}
