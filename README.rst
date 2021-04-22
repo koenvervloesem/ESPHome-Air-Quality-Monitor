@@ -72,11 +72,71 @@ Make sure to connect the power and ground connections too. The BME280 needs 3.3 
 
 The red component of the RGB LED needs a current-limiting resistor of 220 Ω, while the other two color components need a 47 Ω resistor.
 
+**********
+Modularity
+**********
+
+This is a modular ESPHome configuration split up in various YAML files that you can import as `packages <https://esphome.io/guides/configuration-types.html#packages>`_. You can find these in the directory `common <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/tree/main/common>`_:
+
+`aqi.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/aqi.yaml>`_
+  Computes the air quality index (AQI) value (good, acceptable, bad) based on the current CO₂ concentration and the 24-hour averages of the PM2.5 and PM10 concentrations. This value is published as a text sensor and shown as a color (green, yellow, red) on the RGB LED.
+`base.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/base.yaml>`_
+  Sets up the basic ESPHome functionality for the board, including Wi-Fi, a captive portal, logger, Home Assistant API and OTA support. It also sets the threshold values for the CO₂, PM2.5 and PM10 concentrations, as well as the messages when the air quality is good, acceptable or bad.
+`bme280.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/bme280.yaml>`_
+  Sets up the BME280 sensor for temperature, humidity and pressure and the I²C bus it uses.
+`mh-z19b.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/mh-z19b.yaml>`_
+  Sets up the MH-Z19B CO₂ sensor, a binary sensor that shows whether the sensor has been calibrated yet (and sets the LED to blue when it isn't) and a switch to calibrate the sensor.
+`rgb_led_esp32.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/rgb_led_esp32.yaml>`_
+  Sets up the RGB LED on the ESP32 with its LEDC peripheral (a hardware PWM).
+`rgb_led_esp8266.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/rgb_led_esp8266.yaml>`_
+  Sets up the RGB LED on the ESP8266 with software PWM.
+`sds011.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/sds011.yaml>`_
+  Sets up the SDS011 PM sensor.
+`secrets.yaml.example <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/secrets.yaml.example>`_
+  Contains the secrets used in this ESPHome project. Copy this file to a file ``secrets.yaml`` in the ``common`` directory and enter your Wi-Fi, API and OTA credentials.
+
 *****
 Usage
 *****
 
-TODO
+To use this configuration, create a YAML file with:
+
+- substitutions for all pin numbers used by the components, your device's name, platform and board and parameters like update intervals.
+- packages that include the relevant YAML files in the ``common`` directory.
+
+There are two example configurations in this repository:
+
+- `esp8266_example.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/esp8266_example.yaml>`_ for the NodeMCU v2 ESP8266
+- `esp32_example.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/esp32_example.yaml>`_ for the ESP32-DevKitC V4
+
+After this, flash the firmware to your device, e.g. with:
+
+.. code-block:: console
+
+  esphome esp32_example.yaml run
+
+If you successfully created a configuration for another ESP8266 or ESP32 board, please contribute this configuration with a `pull request <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/pulls>`_.
+
+**************
+Customizations
+**************
+
+Thanks to the modularity of the code, it shouldn't be that difficult to create a variant of this project with other sensors. Here are some suggestions:
+
+Change the temperature, humidity and pressure sensor
+  This sensor is currently not referenced in the other YAML files, so you can just add a configuration file for another sensor, disable the package for the BME280 and add a package for the other sensor.
+Change the CO₂ sensor
+  Make sure you give the CO₂ value of your sensor the ID ``co2_value`` and create a binary sensor for its calibration state with ID ``co2_calibrated``.
+Change the RGB LED
+  You can swap the classical RGB LED for another light, as long as it has the ID ``led_rgb`` and it's a light with platform ``rgb`` (with red, green and blue components).
+Change the PM sensor
+  Make sure you give the PM2.5 and PM10 values of your sensor the IDs ``pm2_5_value`` and ``pm10_value``.
+
+With these changes, the rest of the code should still work.
+
+If you successfully created a customization, please contribute this with a `pull request`_, ideally with an example configuration.
+
+More complex customizations could be supported in future versions of this project.
 
 *******
 License
