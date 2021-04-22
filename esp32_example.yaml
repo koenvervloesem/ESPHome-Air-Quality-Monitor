@@ -7,7 +7,7 @@ substitutions:
   i2c_pin_sda: GPIO22
   bme280_i2c_address: "0x76"
   bme280_update_interval: 60s
-  bme280_offset_temperature: "0"
+  bme280_offset_temperature: "-1"
   mhz19b_pin_tx: GPIO35
   mhz19b_pin_rx: GPIO32
   mhz19b_update_interval: 60s
