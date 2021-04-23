@@ -31,7 +31,7 @@ Requirements
 - `Winsen MH-Z19B <https://www.winsen-sensor.com/sensors/co2-sensor/mh-z19b.html>`_ CO₂ sensor
 - `Nova Fitness SDS011 <http://inovafitness.com/en/a/chanpinzhongxin/95.html>`_ particulate matter (PM) sensor
 - `Bosch BME280 <https://www.bosch-sensortec.com/products/environmental-sensors/humidity-sensors-bme280/>`_ breakout board (the 3.3 V version)
-- RGB LED
+- Common cathode RGB LED (or separate red, green and blue LEDs)
 - 220 Ω resistor and two 47 Ω resistors
 - ESPHome
 
