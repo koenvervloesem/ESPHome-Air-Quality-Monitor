@@ -7,11 +7,13 @@ on:
       - '.github/workflows/**'
       - 'common/**'
       - '*_example.yaml'
+      - 'requirements.txt'
   push:
     paths:
       - '.github/workflows/**'
       - 'common/**'
       - '*_example.yaml'
+      - 'requirements.txt'
 
 jobs:
   test:
