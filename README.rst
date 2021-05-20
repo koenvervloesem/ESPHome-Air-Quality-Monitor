@@ -140,6 +140,12 @@ If you successfully created a customization, please contribute this with a `pull
 
 More complex customizations could be supported in future versions of this project.
 
+************************
+Learn more about ESPHome
+************************
+
+If you want to learn more about ESPHome, read my book `Getting Started with ESPHome: Develop your own custom home automation devices <https://koen.vervloesem.eu/books/getting-started-with-esphome/>`_ and the accompanying GitHub repository `koenvervloesem/Getting-Started-with-ESPHome <https://github.com/koenvervloesem/Getting-Started-with-ESPHome/>`_.
+
 *******
 License
 *******
