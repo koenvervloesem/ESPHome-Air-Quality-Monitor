@@ -4,7 +4,7 @@ YAML_FILES = *_example.yaml
 .PHONY: build clean lint requirements
 
 build:
-	esphome $(YAML_FILES) compile
+	esphome compile $(YAML_FILES)
 
 clean:
 	rm -r $(BUILD_DIR)

@@ -113,7 +113,7 @@ After this, flash the firmware to your device, e.g. with:
 
 .. code-block:: console
 
-  esphome esp32_example.yaml run
+  esphome run esp32_example.yaml
 
 After you have added your device to Home Assistant's ESPHome integration, the air quality measurements are available in Home Assistant and you can start the calibration of the CO₂ sensor from within Home Assistant too.
 
