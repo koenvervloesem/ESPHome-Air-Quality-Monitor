@@ -86,9 +86,17 @@ This is a modular ESPHome configuration split up in various YAML files that you 
   Sets up the BME280 sensor for temperature, humidity and pressure and the I²C bus it uses.
 `mh-z19b.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/mh-z19b.yaml>`_
   Sets up the MH-Z19B CO₂ sensor, a binary sensor that shows whether the sensor has been calibrated yet (and sets the LED to blue when it isn't) and a switch to calibrate the sensor.
-`rgb_led_esp32.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/rgb_led_esp32.yaml>`_
+`no_feedback/aqi.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/no_feedback/aqi.yaml>`_
+  Use this if you don't want to show AQI status.
+`no_feedback/calibration.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/no_feedback/calibration.yaml>`_
+  Use this if you don't want to show calibration status.
+`rgb_led/aqi.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/rgb_led/aqi.yaml>`_
+  Shows AQI status on the RGB LED.
+`rgb_led/calibration.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/rgb_led/calibration.yaml>`_
+  Shows calibration status on the RGB LED.
+`rgb_led/esp32.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/rgb_led/esp32.yaml>`_
   Sets up the RGB LED on the ESP32 with its LEDC peripheral (a hardware PWM).
-`rgb_led_esp8266.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/rgb_led_esp8266.yaml>`_
+`rgb_led/esp8266.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/rgb_led/esp8266.yaml>`_
   Sets up the RGB LED on the ESP8266 with software PWM.
 `sds011.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/sds011.yaml>`_
   Sets up the SDS011 PM sensor.

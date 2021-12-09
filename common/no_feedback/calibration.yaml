@@ -1,0 +1,9 @@
+# Configuration for not showing sensor calibration status
+
+switch:
+  - platform: template
+    id: show_calibrating
+    optimistic: true
+  - platform: template
+    id: show_calibrated
+    optimistic: true

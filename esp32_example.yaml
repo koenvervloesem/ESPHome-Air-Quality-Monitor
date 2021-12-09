@@ -1,6 +1,6 @@
 # Example configuration for an ESP32-DevKitC V4
 substitutions:
-  node_name: esp32_example
+  node_name: esp32-example
   node_platform: ESP32
   node_board: esp32dev
   i2c_pin_scl: GPIO21
@@ -32,5 +32,7 @@ packages:
   bme280: !include common/bme280.yaml
   mhz19b: !include common/mh-z19b.yaml
   sds011: !include common/sds011.yaml
-  rgb: !include common/rgb_led_esp32.yaml
+  rgb: !include common/rgb_led/esp32.yaml
+  show_calibration: !include common/rgb_led/calibration.yaml
+  show_aqi: !include common/rgb_led/aqi.yaml
   aqi: !include common/aqi.yaml

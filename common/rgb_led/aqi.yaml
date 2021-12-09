@@ -1,0 +1,34 @@
+# Configuration for showing AQI status with the RGB LED
+
+switch:
+  - platform: template
+    id: show_bad
+    optimistic: true
+    on_turn_on:
+      then:
+        - light.turn_on:
+            id: led_rgb
+            red: 100%
+            green: 0%
+            blue: 0%
+  - platform: template
+    id: show_acceptable
+    optimistic: true
+    on_turn_on:
+      then:
+        - light.turn_on:
+            id: led_rgb
+            red: 100%
+            green: 100%
+            blue: 0%
+  - platform: template
+    id: show_good
+    optimistic: true
+    on_turn_on:
+      then:
+        - light.turn_on:
+            id: led_rgb
+            red: 0%
+            green: 100%
+            blue: 0%
+

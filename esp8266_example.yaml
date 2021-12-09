@@ -1,6 +1,6 @@
 # Example configuration for a NodeMCU v2 ESP8266 development board
 substitutions:
-  node_name: esp8266_example
+  node_name: esp8266-example
   node_platform: ESP8266
   node_board: nodemcuv2
   i2c_pin_scl: D1
@@ -24,7 +24,9 @@ packages:
   bme280: !include common/bme280.yaml
   mhz19b: !include common/mh-z19b.yaml
   sds011: !include common/sds011.yaml
-  rgb: !include common/rgb_led_esp8266.yaml
+  rgb: !include common/rgb_led/esp8266.yaml
+  show_calibration: !include common/rgb_led/calibration.yaml
+  show_aqi: !include common/rgb_led/aqi.yaml
   aqi: !include common/aqi.yaml
 
 logger:
