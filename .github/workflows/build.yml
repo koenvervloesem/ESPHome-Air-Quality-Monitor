@@ -6,12 +6,14 @@ on:
     paths:
       - '.github/workflows/**'
       - 'common/**'
+      - 'include/**'
       - '*_example.yaml'
       - 'requirements.txt'
   push:
     paths:
       - '.github/workflows/**'
       - 'common/**'
+      - 'include/**'
       - '*_example.yaml'
       - 'requirements.txt'
 
