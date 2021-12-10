@@ -1,0 +1,177 @@
+# Example configuration for an ESP32-DevKitC V4
+substitutions:
+  node_name: tdisplay-example
+  node_platform: ESP32
+  node_board: featheresp32
+  i2c_pin_scl: GPIO21
+  i2c_pin_sda: GPIO22
+  bme280_i2c_address: "0x76"
+  bme280_update_interval: 60s
+  bme280_offset_temperature: "-1"
+  mhz19b_pin_tx: GPIO39
+  mhz19b_pin_rx: GPIO32
+  mhz19b_update_interval: 60s
+  mhz19b_calibration_interval: 30d
+  sds011_pin_tx: GPIO25
+  sds011_pin_rx: GPIO33
+  sds011_update_interval: 5min
+
+packages:
+  base: !include common/base.yaml
+  bme280: !include common/bme280.yaml
+  mhz19b: !include common/mh-z19b.yaml
+  sds011: !include common/sds011.yaml
+  aqi: !include common/aqi.yaml
+  no_aqi: !include common/no_feedback/aqi.yaml
+  no_calibration: !include common/no_feedback/calibration.yaml
+
+color:
+  - id: color_red
+    red: 100%
+    green: 0%
+    blue: 0%
+  - id: color_yellow
+    red: 100%
+    green: 100%
+    blue: 0%
+  - id: color_green
+    red: 0%
+    green: 100%
+    blue: 0%
+  - id: color_blue
+    red: 0%
+    green: 0%
+    blue: 100%
+  - id: color_gray
+    red: 50%
+    green: 50%
+    blue: 50%
+
+font:
+  - file: "fonts/Roboto-Medium.ttf"
+    id: roboto_24
+    size: 24
+    glyphs: '!"%()+,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/³µ'
+  - file: "fonts/Roboto-Medium.ttf"
+    id: roboto_12
+    size: 12
+    glyphs: '!"%()+,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/³µ'
+
+binary_sensor:
+  - platform: status
+    id: system_status
+  - platform: gpio
+    id: button1
+    pin:
+      number: GPIO35
+      inverted: true
+    on_click:
+      - min_length: 50ms
+        max_length: 350ms
+        then:
+          - display.page.show_next: ttgo_tdisplay
+          - component.update: ttgo_tdisplay
+      - min_length: 500ms
+        max_length: 1000ms
+        then:
+          - switch.toggle: backlight
+  - platform: gpio
+    id: button2
+    pin:
+      number: GPIO0
+      inverted: true
+      mode: INPUT_PULLUP
+    on_click:
+      then:
+        - switch.turn_on: co2_calibrate
+
+switch:
+  - platform: gpio
+    pin: GPIO4
+    name: "${node_name} backlight"
+    id: backlight
+
+# This is the 'internal' SPI bus for the T-Display's display
+spi:
+  clk_pin: GPIO18
+  mosi_pin: GPIO19
+
+display:
+  - platform: st7789v
+    id: ttgo_tdisplay
+    backlight_pin: GPIO4
+    cs_pin: GPIO5
+    dc_pin: GPIO16
+    reset_pin: GPIO23
+    rotation: 270
+    pages:
+      - id: page1
+        lambda: |-
+          it.rectangle(0,  0, it.get_width(), it.get_height(), id(color_blue));
+          it.rectangle(0, 20, it.get_width(), it.get_height(), id(color_blue));   // header bar
+
+          it.print(5, 5, id(roboto_12), id(color_yellow), TextAlign::TOP_LEFT, "ESPHome");
+
+          if (id(co2_calibrate).state) {
+              it.print((240 / 2), 5, id(roboto_12), id(color_yellow), TextAlign::TOP_CENTER, "Calibrating...");
+          }
+          else if (!id(co2_calibrated).state) {
+              it.print((240 / 2), 5, id(roboto_12), id(color_red), TextAlign::TOP_CENTER, "Calibrate");
+          }
+
+          it.printf((240 / 2), (110 / 3) * 2 + 5, id(roboto_24), id(color_gray), TextAlign::CENTER, "CO2: %.0f ppm", id(co2_value).state);
+
+          if (id(system_status).state) {
+              it.print(235, 5, id(roboto_12), id(color_green), TextAlign::TOP_RIGHT, "Online");
+          }
+          else {
+              it.print(235, 5, id(roboto_12), id(color_red), TextAlign::TOP_RIGHT, "Offline");
+          }
+      - id: page2
+        lambda: |-
+          it.rectangle(0,  0, it.get_width(), it.get_height(), id(color_blue));
+          it.rectangle(0, 20, it.get_width(), it.get_height(), id(color_blue));   // header bar
+
+          it.print(5, 5, id(roboto_12), id(color_yellow), TextAlign::TOP_LEFT, "ESPHome");
+
+          if (id(co2_calibrate).state) {
+              it.print((240 / 2), 5, id(roboto_12), id(color_yellow), TextAlign::TOP_CENTER, "Calibrating...");
+          }
+          else if (!id(co2_calibrated).state) {
+              it.print((240 / 2), 5, id(roboto_12), id(color_red), TextAlign::TOP_CENTER, "Calibrate");
+          }
+
+          it.printf((240 / 2), (110 / 3) * 1 + 5, id(roboto_24), id(color_gray), TextAlign::CENTER, "t:  %.1f °C", id(t_value).state);
+          it.printf((240 / 2), (110 / 3) * 2 + 5, id(roboto_24), id(color_gray), TextAlign::CENTER, "RH: %.1f %%", id(h_value).state);
+          it.printf((240 / 2), (110 / 3) * 3 + 5, id(roboto_24), id(color_gray), TextAlign::CENTER, "p: %.0f hPa", id(p_value).state);
+
+          if (id(system_status).state) {
+              it.print(235, 5, id(roboto_12), id(color_green), TextAlign::TOP_RIGHT, "Online");
+          }
+          else {
+              it.print(235, 5, id(roboto_12), id(color_red), TextAlign::TOP_RIGHT, "Offline");
+          }
+      - id: page3
+        lambda: |-
+          it.rectangle(0,  0, it.get_width(), it.get_height(), id(color_blue));
+          it.rectangle(0, 20, it.get_width(), it.get_height(), id(color_blue));   // header bar
+
+          it.print(5, 5, id(roboto_12), id(color_yellow), TextAlign::TOP_LEFT, "ESPHome");
+
+          if (id(co2_calibrate).state) {
+              it.print((240 / 2), 5, id(roboto_12), id(color_yellow), TextAlign::TOP_CENTER, "Calibrating...");
+          }
+          else if (!id(co2_calibrated).state) {
+              it.print((240 / 2), 5, id(roboto_12), id(color_red), TextAlign::TOP_CENTER, "Calibrate");
+          }
+
+          it.printf((240 / 2), (140 / 3) * 1 + 5, id(roboto_24), id(color_gray), TextAlign::CENTER, "PM2.5: %.0f µg/m³", id(pm2_5_value).state);
+          it.printf((240 / 2), (140 / 3) * 2 + 5, id(roboto_24), id(color_gray), TextAlign::CENTER, "PM10: %.0f µg/m³", id(pm10_value).state);
+
+          if (id(system_status).state) {
+              it.print(235, 5, id(roboto_12), id(color_green), TextAlign::TOP_RIGHT, "Online");
+          }
+          else {
+              it.print(235, 5, id(roboto_12), id(color_red), TextAlign::TOP_RIGHT, "Offline");
+          }
+

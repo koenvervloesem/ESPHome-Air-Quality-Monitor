@@ -16,9 +16,9 @@ This `ESPHome <https://esphome.io/>`_ configuration builds firmware for a DIY in
 - PM2.5 and PM10 concentration
 - temperature, humidity and pressure
 
-It shows feedback for the current air quality with an RGB LED: green if the air quality is good, yellow if it's acceptable, and red if it's bad.
+It optionally shows feedback for the current air quality with an RGB LED: green if the air quality is good, yellow if it's acceptable, and red if it's bad. An alternative is showing the sensor measurements on a display.
 
-You can build this on a perfboard in a project box like this:
+You can build an example implementation on a perfboard in a project box like this:
 
 .. image:: https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/raw/main/air-quality-monitor-on-perfboard.jpg
    :alt: A DIY air quality monitor on a perfboard in a project box
@@ -31,9 +31,12 @@ Requirements
 - `Winsen MH-Z19B <https://www.winsen-sensor.com/sensors/co2-sensor/mh-z19b.html>`_ CO₂ sensor
 - `Nova Fitness SDS011 <http://inovafitness.com/en/a/chanpinzhongxin/95.html>`_ particulate matter (PM) sensor
 - `Bosch BME280 <https://www.bosch-sensortec.com/products/environmental-sensors/humidity-sensors-bme280/>`_ breakout board (the 3.3 V version)
+- ESPHome
+
+Optionally:
+
 - Common cathode RGB LED (or separate red, green and blue LEDs)
 - 220 Ω resistor and two 47 Ω resistors
-- ESPHome
 
 ***********
 Connections
@@ -43,30 +46,31 @@ I have tested this code with:
 
 - the NodeMCU v2 ESP8266
 - the ESP32-DevKitC V4
+- the LilyGO TTGO T-Display ESP32 (using the built-in display instead of an RGB LED for feedback)
 
 Here are the connections to the pins of these boards:
 
-+--------------+-----------------+------------------+
-| Component    | NodeMCU ESP8266 | ESP32-DevKitC V4 |
-+==============+=================+==================+
-| BME280 SCL   | D1              | GPIO21           |
-+--------------+-----------------+------------------+
-| BME280 SDA   | D2              | GPIO22           |
-+--------------+-----------------++-----------------+
-| MH-Z19B TX   | D4              | GPIO35           |
-+--------------+-----------------+------------------+
-| MH-Z19B RX   | D5              | GPIO32           |
-+--------------+-----------------+------------------+
-| SDS011 TX    | D3              | GPIO34           |
-+--------------+-----------------+------------------+
-| SDS011 RX    | D6              | GPIO33           |
-+--------------+-----------------+------------------+
-| LED red      | D7              | GPIO5            |
-+--------------+-----------------+------------------+
-| LED green    | D8              | GPIO17           |
-+--------------+-----------------+------------------+
-| LED blue     | TX              | GPIO16           |
-+--------------+-----------------+------------------+
++--------------+-----------------+------------------+----------------------+
+| Component    | NodeMCU ESP8266 | ESP32-DevKitC V4 | TTGO T-Display ESP32 |
++==============+=================+==================+======================+
+| BME280 SCL   | D1              | GPIO21           | GPIO21               |
++--------------+-----------------+------------------+----------------------+
+| BME280 SDA   | D2              | GPIO22           | GPIO22               |
++--------------+-----------------++-----------------+----------------------+
+| MH-Z19B TX   | D4              | GPIO35           | GPIO39               |
++--------------+-----------------+------------------+----------------------+
+| MH-Z19B RX   | D5              | GPIO32           | GPIO32               |
++--------------+-----------------+------------------+----------------------+
+| SDS011 TX    | D3              | GPIO34           | GPIO25               |
++--------------+-----------------+------------------+----------------------+
+| SDS011 RX    | D6              | GPIO33           | GPIO33               |
++--------------+-----------------+------------------+----------------------+
+| LED red      | D7              | GPIO5            | /                    |
++--------------+-----------------+------------------+----------------------+
+| LED green    | D8              | GPIO17           | /                    |
++--------------+-----------------+------------------+----------------------+
+| LED blue     | TX              | GPIO16           | /                    |
++--------------+-----------------+------------------+----------------------+
 
 Make sure to connect the power and ground connections too. The BME280 needs 3.3 V, the MH-Z19B and SDS011 need 5 V.
 
@@ -112,10 +116,11 @@ To use this configuration, create a YAML file with:
 - substitutions for all pin numbers used by the components, your device's name, platform and board and parameters like update intervals.
 - packages that include the relevant YAML files in the ``common`` directory.
 
-There are two example configurations in this repository:
+There are three example configurations in this repository:
 
 - `esp8266_example.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/esp8266_example.yaml>`_ for the NodeMCU v2 ESP8266
 - `esp32_example.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/esp32_example.yaml>`_ for the ESP32-DevKitC V4
+- `t-display_example.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/t-display_example.yaml>`_ for the TTGO T-Display ESP32
 
 After this, flash the firmware to your device, e.g. with:
 
@@ -123,7 +128,7 @@ After this, flash the firmware to your device, e.g. with:
 
   esphome run esp32_example.yaml
 
-After you have added your device to Home Assistant's ESPHome integration, the air quality measurements are available in Home Assistant and you can start the calibration of the CO₂ sensor from within Home Assistant too.
+After you have added your device to Home Assistant's ESPHome integration, the air quality measurements are available in Home Assistant and you can start the calibration of the CO₂ sensor from within Home Assistant too (or with the top button on the TTGO T-Display ESP32).
 
 If you successfully created a configuration for another ESP8266 or ESP32 board, please contribute this configuration with a `pull request <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/pulls>`_.
 
@@ -159,5 +164,7 @@ License
 *******
 
 This project is provided by `Koen Vervloesem <http://koen.vervloesem.eu>`_ as open source software with the MIT license. See the `LICENSE file <LICENSE>`_ for more information.
+
+The included Roboto font is licensed under the `Apache License, Version 2.0 <https://fonts.google.com/specimen/Roboto#license>`_.
 
 The C++/runtime codebase of the ESPHome project (file extensions .c, .cpp, .h, .hpp, .tcc, .ino) are published under the GPLv3 license. The Python codebase and all other parts of the ESPHome codebase are published under the MIT license. See the `ESPHome License <https://github.com/esphome/esphome/blob/dev/LICENSE>`_ for more information.
