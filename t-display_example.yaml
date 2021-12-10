@@ -83,18 +83,24 @@ display:
     pages:
       - id: page1
         lambda: |-
-          drawHeader(it, id(roboto_12), id(color_blue), id(color_green), id(color_red), id(color_yellow), id(co2_calibrate), id(co2_calibrated), id(system_status));
+          drawHeader(it, id(color_blue));
+          showCalibration(it, id(roboto_12), id(color_yellow), id(color_red), id(co2_calibrate), id(co2_calibrated));
+          showStatus(it, id(roboto_12), id(color_green), id(color_red), id(system_status));
           it.printf((240 / 2), (110 / 3) * 1 + 5, id(roboto_24), id(color_gray), TextAlign::CENTER, "CO2: %.0f ppm", id(co2_value).state);
           it.graph(0, 60, id(co2_graph));
       - id: page2
         lambda: |-
-          drawHeader(it, id(roboto_12), id(color_blue), id(color_green), id(color_red), id(color_yellow), id(co2_calibrate), id(co2_calibrated), id(system_status));
+          drawHeader(it, id(color_blue));
+          showCalibration(it, id(roboto_12), id(color_yellow), id(color_red), id(co2_calibrate), id(co2_calibrated));
+          showStatus(it, id(roboto_12), id(color_green), id(color_red), id(system_status));
           it.printf((240 / 2), (110 / 3) * 1 + 5, id(roboto_24), id(color_gray), TextAlign::CENTER, "t:  %.1f °C", id(t_value).state);
           it.printf((240 / 2), (110 / 3) * 2 + 5, id(roboto_24), id(color_gray), TextAlign::CENTER, "RH: %.1f %%", id(h_value).state);
           it.printf((240 / 2), (110 / 3) * 3 + 5, id(roboto_24), id(color_gray), TextAlign::CENTER, "p: %.0f hPa", id(p_value).state);
       - id: page3
         lambda: |-
-          drawHeader(it, id(roboto_12), id(color_blue), id(color_green), id(color_red), id(color_yellow), id(co2_calibrate), id(co2_calibrated), id(system_status));
+          drawHeader(it, id(color_blue));
+          showCalibration(it, id(roboto_12), id(color_yellow), id(color_red), id(co2_calibrate), id(co2_calibrated));
+          showStatus(it, id(roboto_12), id(color_green), id(color_red), id(system_status));
           it.printf(5, 25, id(roboto_24), id(color_yellow), TextAlign::TOP_LEFT, "%.0f µg/m³", id(pm2_5_value).state);
           it.printf(235, 25, id(roboto_24), id(color_green), TextAlign::TOP_RIGHT, "%.0f µg/m³", id(pm10_value).state);
           it.graph(0, 60, id(pm_graph));
