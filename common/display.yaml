@@ -1,0 +1,54 @@
+color:
+  - id: color_red
+    red: 100%
+    green: 0%
+    blue: 0%
+  - id: color_yellow
+    red: 100%
+    green: 100%
+    blue: 0%
+  - id: color_green
+    red: 0%
+    green: 100%
+    blue: 0%
+  - id: color_blue
+    red: 0%
+    green: 0%
+    blue: 100%
+  - id: color_gray
+    red: 50%
+    green: 50%
+    blue: 50%
+
+font:
+  - file: "fonts/Roboto-Medium.ttf"
+    id: roboto_24
+    size: 24
+    # yamllint disable-line rule:line-length
+    glyphs: '!"%()+,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/³µ'
+  - file: "fonts/Roboto-Medium.ttf"
+    id: roboto_12
+    size: 12
+    # yamllint disable-line rule:line-length
+    glyphs: '!"%()+,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/³µ'
+
+graph:
+  - id: co2_graph
+    sensor: co2_value
+    duration: 1h
+    min_value: 400
+    max_value: 2000
+    width: ${graph_width}
+    height: ${graph_height}
+    border: false
+  - id: pm_graph
+    duration: 1h
+    min_value: 0
+    width: ${graph_width}
+    height: ${graph_height}
+    border: false
+    traces:
+      - sensor: pm2_5_value
+        color: color_yellow
+      - sensor: pm10_value
+        color: color_green
