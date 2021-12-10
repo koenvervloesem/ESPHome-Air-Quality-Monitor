@@ -96,6 +96,7 @@ spi:
   clk_pin: GPIO18
   mosi_pin: GPIO19
 
+# yamllint disable rule:line-length
 display:
   - platform: st7789v
     id: ttgo_tdisplay
@@ -174,4 +175,3 @@ display:
           else {
               it.print(235, 5, id(roboto_12), id(color_red), TextAlign::TOP_RIGHT, "Offline");
           }
-
