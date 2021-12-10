@@ -87,7 +87,8 @@ This is a modular ESPHome configuration split up in various YAML files that you 
 `base.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/base.yaml>`_
   Sets up the basic ESPHome functionality for the board, including Wi-Fi, a captive portal, logger, Home Assistant API and OTA support. It also sets the threshold values for the CO₂, PM2.5 and PM10 concentrations, as well as the messages when the air quality is good, acceptable or bad.
 `bme280.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/bme280.yaml>`_
-  Sets up the BME280 sensor for temperature, humidity and pressure and the I²C bus it uses.
+`display.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/display.yaml>`_
+  Configures colors and fonts as well as graphs for the CO₂ and particulate matter concentrations.
 `mh-z19b.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/mh-z19b.yaml>`_
   Sets up the MH-Z19B CO₂ sensor, a binary sensor that shows whether the sensor has been calibrated yet (and sets the LED to blue when it isn't) and a switch to calibrate the sensor.
 `no_feedback/aqi.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/no_feedback/aqi.yaml>`_
