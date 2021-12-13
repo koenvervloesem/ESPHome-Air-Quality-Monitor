@@ -72,7 +72,7 @@ Here are the connections to the pins of these boards:
 | LED blue           | TX              | GPIO16           | /                    |
 +--------------------+-----------------+------------------+----------------------+
 
-Make sure to connect the power and ground connections too. The BME280 needs 3.3 V, the MH-Z19B and SDS011 need 5 V.
+Make sure to connect the power and ground connections too. The BME280 needs 3.3 V, the MH-Z19B, T6615 and SDS011 need 5 V.
 
 The red component of the RGB LED needs a current-limiting resistor of 220 Ω, while the other two color components need a 47 Ω resistor.
 
