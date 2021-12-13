@@ -79,11 +79,7 @@ script:
             - text_sensor.template.publish:
                 id: aqi
                 state: ${aqi_message_bad}
-            - if:
-                condition:
-                  binary_sensor.is_on: co2_calibrated
-                then:
-                  - switch.turn_on: show_bad
+            - script.execute: show_bad
           else:
             # Acceptable if at least one of the sensor values is acceptable
             - if:
@@ -102,18 +98,10 @@ script:
                   - text_sensor.template.publish:
                       id: aqi
                       state: ${aqi_message_acceptable}
-                  - if:
-                      condition:
-                        binary_sensor.is_on: co2_calibrated
-                      then:
-                        - switch.turn_on: show_acceptable
+                  - script.execute: show_acceptable
                 else:
                   # Otherwise good (all of the sensor values are good)
                   - text_sensor.template.publish:
                       id: aqi
                       state: ${aqi_message_good}
-                  - if:
-                      condition:
-                        binary_sensor.is_on: co2_calibrated
-                      then:
-                        - switch.turn_on: show_good
+                  - script.execute: show_good

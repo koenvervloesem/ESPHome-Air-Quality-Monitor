@@ -1,12 +1,12 @@
 # Configuration for not showing AQI status
 
-switch:
-  - platform: template
-    id: show_bad
-    optimistic: true
-  - platform: template
-    id: show_acceptable
-    optimistic: true
-  - platform: template
-    id: show_good
-    optimistic: true
+script:
+  - id: show_bad
+    then:
+      - delay: 1s
+  - id: show_acceptable
+    then:
+      - delay: 1s
+  - id: show_good
+    then:
+      - delay: 1s

@@ -8,10 +8,9 @@ substitutions:
   bme280_i2c_address: "0x76"
   bme280_update_interval: 60s
   bme280_offset_temperature: "-1"
-  mhz19b_pin_tx: GPIO39
-  mhz19b_pin_rx: GPIO32
-  mhz19b_update_interval: 60s
-  mhz19b_calibration_interval: 30d
+  t6615_pin_tx: GPIO39
+  t6615_pin_rx: GPIO32
+  t6615_update_interval: 60s
   sds011_pin_tx: GPIO25
   sds011_pin_rx: GPIO33
   sds011_update_interval: 1min
@@ -21,7 +20,7 @@ substitutions:
 packages:
   base: !include common/base.yaml
   bme280: !include common/bme280.yaml
-  mhz19b: !include common/mh-z19b.yaml
+  t6615: !include common/t6615.yaml
   sds011: !include common/sds011.yaml
   aqi: !include common/aqi.yaml
   no_aqi: !include common/no_feedback/aqi.yaml
@@ -50,15 +49,15 @@ binary_sensor:
         max_length: 1000ms
         then:
           - switch.toggle: backlight
-  - platform: gpio
-    id: button2
-    pin:
-      number: GPIO0
-      inverted: true
-      mode: INPUT_PULLUP
-    on_click:
-      then:
-        - switch.turn_on: co2_calibrate
+#  - platform: gpio
+#    id: button2
+#    pin:
+#      number: GPIO0
+#      inverted: true
+#      mode: INPUT_PULLUP
+#    on_click:
+#      then:
+#        - switch.turn_on: co2_calibrate
 
 switch:
   - platform: gpio
@@ -84,14 +83,14 @@ display:
       - id: page1
         lambda: |-
           drawHeader(it, id(color_blue));
-          showCalibration(it, id(roboto_12), id(color_yellow), id(color_red), id(co2_calibrate), id(co2_calibrated));
+          //showCalibration(it, id(roboto_12), id(color_yellow), id(color_red), id(co2_calibrate), id(co2_calibrated));
           showStatus(it, id(roboto_12), id(color_green), id(color_red), id(system_status));
           it.printf((240 / 2), (110 / 3) * 1 + 5, id(roboto_24), id(color_gray), TextAlign::CENTER, "CO2: %.0f ppm", id(co2_value).state);
           it.graph(0, 60, id(co2_graph));
       - id: page2
         lambda: |-
           drawHeader(it, id(color_blue));
-          showCalibration(it, id(roboto_12), id(color_yellow), id(color_red), id(co2_calibrate), id(co2_calibrated));
+          //showCalibration(it, id(roboto_12), id(color_yellow), id(color_red), id(co2_calibrate), id(co2_calibrated));
           showStatus(it, id(roboto_12), id(color_green), id(color_red), id(system_status));
           it.printf((240 / 2), (110 / 3) * 1 + 5, id(roboto_24), id(color_gray), TextAlign::CENTER, "t:  %.1f °C", id(t_value).state);
           it.printf((240 / 2), (110 / 3) * 2 + 5, id(roboto_24), id(color_gray), TextAlign::CENTER, "RH: %.1f %%", id(h_value).state);
@@ -99,7 +98,7 @@ display:
       - id: page3
         lambda: |-
           drawHeader(it, id(color_blue));
-          showCalibration(it, id(roboto_12), id(color_yellow), id(color_red), id(co2_calibrate), id(co2_calibrated));
+          //showCalibration(it, id(roboto_12), id(color_yellow), id(color_red), id(co2_calibrate), id(co2_calibrated));
           showStatus(it, id(roboto_12), id(color_green), id(color_red), id(system_status));
           it.printf(5, 25, id(roboto_24), id(color_yellow), TextAlign::TOP_LEFT, "%.0f µg/m³", id(pm2_5_value).state);
           it.printf(235, 25, id(roboto_24), id(color_green), TextAlign::TOP_RIGHT, "%.0f µg/m³", id(pm10_value).state);

@@ -1,0 +1,30 @@
+# Configuration for the T6615 CO₂ sensor
+#
+# Used substitutions:
+#
+# - t6615_pin_tx: pin connected to the TX pin of the sensor
+# - t6615_pin_rx: pin connected to the RX pin of the sensor
+# - t6615_update_interval: update interval of the sensor
+# - node_name: name of the device
+#
+# IDs used outside this file:
+#
+# - co2_value: the CO₂ concentration measured by the sensor
+
+uart:
+  - id: uart_t6615
+    rx_pin: ${t6615_pin_tx}
+    tx_pin: ${t6615_pin_rx}
+    baud_rate: 19200
+
+sensor:
+  - platform: t6615
+    id: co2_sensor
+    uart_id: uart_t6615
+    co2:
+      name: "${node_name} CO₂"
+      id: co2_value
+      on_value:
+        then:
+          - script.execute: update_aqi
+    update_interval: ${t6615_update_interval}
