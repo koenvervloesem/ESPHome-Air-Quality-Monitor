@@ -28,7 +28,7 @@ Requirements
 ************
 
 - ESP8266 or ESP32 board
-- `Winsen MH-Z19B <https://www.winsen-sensor.com/sensors/co2-sensor/mh-z19b.html>`_ CO₂ sensor
+- `Winsen MH-Z19B <https://www.winsen-sensor.com/sensors/co2-sensor/mh-z19b.html>`_ or `Telaire T6615 <https://www.amphenol-sensors.com/en/telaire/co2/525-co2-sensor-modules/319-t6615>`_ CO₂ sensor
 - `Nova Fitness SDS011 <http://inovafitness.com/en/a/chanpinzhongxin/95.html>`_ particulate matter (PM) sensor
 - `Bosch BME280 <https://www.bosch-sensortec.com/products/environmental-sensors/humidity-sensors-bme280/>`_ breakout board (the 3.3 V version)
 - ESPHome
@@ -50,27 +50,27 @@ I have tested this code with:
 
 Here are the connections to the pins of these boards:
 
-+--------------+-----------------+------------------+----------------------+
-| Component    | NodeMCU ESP8266 | ESP32-DevKitC V4 | TTGO T-Display ESP32 |
-+==============+=================+==================+======================+
-| BME280 SCL   | D1              | GPIO21           | GPIO21               |
-+--------------+-----------------+------------------+----------------------+
-| BME280 SDA   | D2              | GPIO22           | GPIO22               |
-+--------------+-----------------++-----------------+----------------------+
-| MH-Z19B TX   | D4              | GPIO35           | GPIO39               |
-+--------------+-----------------+------------------+----------------------+
-| MH-Z19B RX   | D5              | GPIO32           | GPIO32               |
-+--------------+-----------------+------------------+----------------------+
-| SDS011 TX    | D3              | GPIO34           | GPIO25               |
-+--------------+-----------------+------------------+----------------------+
-| SDS011 RX    | D6              | GPIO33           | GPIO33               |
-+--------------+-----------------+------------------+----------------------+
-| LED red      | D7              | GPIO5            | /                    |
-+--------------+-----------------+------------------+----------------------+
-| LED green    | D8              | GPIO17           | /                    |
-+--------------+-----------------+------------------+----------------------+
-| LED blue     | TX              | GPIO16           | /                    |
-+--------------+-----------------+------------------+----------------------+
++--------------------+-----------------+------------------+----------------------+
+| Component          | NodeMCU ESP8266 | ESP32-DevKitC V4 | TTGO T-Display ESP32 |
++====================+=================+==================+======================+
+| BME280 SCL         | D1              | GPIO21           | GPIO21               |
++--------------------+-----------------+------------------+----------------------+
+| BME280 SDA         | D2              | GPIO22           | GPIO22               |
++--------------------+-----------------++-----------------+----------------------+
+| MH-Z19B / T6615 TX | D4              | GPIO35           | GPIO39               |
++--------------------+-----------------+------------------+----------------------+
+| MH-Z19B / T6615 RX | D5              | GPIO32           | GPIO32               |
++--------------------+-----------------+------------------+----------------------+
+| SDS011 TX          | D3              | GPIO34           | GPIO25               |
++--------------------+-----------------+------------------+----------------------+
+| SDS011 RX          | D6              | GPIO33           | GPIO33               |
++--------------------+-----------------+------------------+----------------------+
+| LED red            | D7              | GPIO5            | /                    |
++--------------------+-----------------+------------------+----------------------+
+| LED green          | D8              | GPIO17           | /                    |
++--------------------+-----------------+------------------+----------------------+
+| LED blue           | TX              | GPIO16           | /                    |
++--------------------+-----------------+------------------+----------------------+
 
 Make sure to connect the power and ground connections too. The BME280 needs 3.3 V, the MH-Z19B and SDS011 need 5 V.
 
@@ -108,6 +108,8 @@ This is a modular ESPHome configuration split up in various YAML files that you 
   Sets up the SDS011 PM sensor.
 `secrets.yaml.example <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/secrets.yaml.example>`_
   Contains the secrets used in this ESPHome project. Copy this file to a file ``secrets.yaml`` in the ``common`` directory and enter your Wi-Fi, API and OTA credentials.
+`t6615.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/t6615.yaml>`_
+  Sets up the T6615 CO₂ sensor, which doesn't need calibration.
 
 *****
 Usage
