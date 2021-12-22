@@ -24,6 +24,9 @@ sensor:
     co2:
       name: "${node_name} CO₂"
       id: co2_value
+      filters:
+        - filter_out: 0
+        - filter_out: 65535
       on_value:
         then:
           - script.execute: update_aqi
