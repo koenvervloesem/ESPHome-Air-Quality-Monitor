@@ -1,4 +1,4 @@
-# Example configuration for an ESP32-DevKitC V4
+# Example configuration for a TTGO T-Display ESP32
 substitutions:
   node_name: tdisplay-example
   node_platform: ESP32
@@ -13,7 +13,7 @@ substitutions:
   t6615_update_interval: 60s
   sds011_pin_tx: GPIO25
   sds011_pin_rx: GPIO33
-  sds011_update_interval: 1min
+  sds011_update_interval: 5min
   graph_width: "240"
   graph_height: "75"
 
