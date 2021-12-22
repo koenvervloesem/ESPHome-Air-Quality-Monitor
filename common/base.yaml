@@ -35,7 +35,7 @@ esphome:
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
-
+  reboot_timeout: 0s
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "AP ${node_name}"
@@ -49,6 +49,7 @@ logger:
 # Enable Home Assistant API
 api:
   password: !secret api_password
+  reboot_timeout: 0s
 
 ota:
   password: !secret ota_password
