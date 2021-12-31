@@ -28,6 +28,8 @@ Or a portable version with battery (at the back) and display:
 .. image:: https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/raw/main/air-quality-monitor-with-display.jpg
    :alt: A DIY air quality monitor with display and battery
 
+Note the DC/DC boost converter next to the ESP32 board. It always supplies 5 V to the T6615 and SDS011, irrespective of the input voltage (3.7 V if running on the battery and 5 V if running from the USB-C power).
+
 ************
 Requirements
 ************
@@ -42,6 +44,8 @@ Optionally:
 
 - Common cathode RGB LED (or separate red, green and blue LEDs)
 - 220 Ω resistor and two 47 Ω resistors
+- LiPo or Li-Ion battery
+- DC/DC boost converter with 5 V output
 
 ***********
 Connections
