@@ -23,6 +23,11 @@ You can build an example implementation on a perfboard in a project box like thi
 .. image:: https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/raw/main/air-quality-monitor-on-perfboard.jpg
    :alt: A DIY air quality monitor on a perfboard in a project box
 
+Or a portable version with battery (at the back) and display:
+
+.. image:: https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/raw/main/air-quality-monitor-with-display.jpg
+   :alt: A DIY air quality monitor with display and battery
+
 ************
 Requirements
 ************
