@@ -21,12 +21,12 @@ color:
     blue: 50%
 
 font:
-  - file: "fonts/Roboto-Medium.ttf"
+  - file: "gfonts://Roboto@medium"
     id: roboto_24
     size: 24
     # yamllint disable-line rule:line-length
     glyphs: '!"%()+,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz/³µ'
-  - file: "fonts/Roboto-Medium.ttf"
+  - file: "gfonts://Roboto@medium"
     id: roboto_12
     size: 12
     # yamllint disable-line rule:line-length
