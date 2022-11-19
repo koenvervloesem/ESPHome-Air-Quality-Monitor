@@ -9,5 +9,6 @@ jobs:
   build:
     uses: esphome/workflows/.github/workflows/publish.yml@main
     with:
-      files: esphome-air-quality-monitor-esp8266.yaml,esphome-air-quality-monitor-esp32.yaml,esphome-air-quality-monitor-t-display.yaml
+      files: esphome-air-quality-monitor-esp8266.yaml,esphome-air-quality-monitor-esp32.yaml
+      #files: esphome-air-quality-monitor-esp8266.yaml,esphome-air-quality-monitor-esp32.yaml,esphome-air-quality-monitor-t-display.yaml
       name: ESPHome Air Quality Monitor
