@@ -19,10 +19,8 @@ substitutions:
 # See https://github.com/esphome/feature-requests/issues/609
 esphome:
   platformio_options:
-    platform: espressif32
+    platform: espressif32@3.5.0
     board: az-delivery-devkit-v4
-    board_build.mcu: esp32
-    board_build.f_cpu: 240000000L
 
 esp32:
   board: esp32dev
