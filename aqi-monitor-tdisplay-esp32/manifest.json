@@ -1,0 +1,9 @@
+{
+  "chipFamily": "ESP32",
+  "parts": [
+    {
+      "path": "aqi-monitor-tdisplay-esp32/aqi-monitor-tdisplay-esp32.bin",
+      "offset": 0
+    }
+  ]
+}
