@@ -1,14 +1,14 @@
 {
-  "name": "ESPHome Air Quality Monitor for T-Display",
+  "name": "ESPHome Air Quality Monitor for ESP8266",
   "version": "",
   "home_assistant_domain": "esphome",
   "new_install_skip_erase": false,
   "builds": [
     {
-      "chipFamily": "ESP32",
+      "chipFamily": "ESP8266",
       "parts": [
         {
-          "path": "aqi-monitor-esp32/aqi-monitor-esp32.bin",
+          "path": "aqi-monitor-esp8266/aqi-monitor-esp8266.bin",
           "offset": 0
         }
       ]
