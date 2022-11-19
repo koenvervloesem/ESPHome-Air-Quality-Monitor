@@ -10,8 +10,8 @@ jobs:
     strategy:
       matrix:
         file:
-          - esphome-air-quality-monitor-esp32.yaml
           - esphome-air-quality-monitor-esp8266.yaml
+          - esphome-air-quality-monitor-esp32.yaml
           - esphome-air-quality-monitor-t-display.yaml
     steps:
       - name: Checkout source code
