@@ -8,7 +8,7 @@
       "chipFamily": "ESP32",
       "parts": [
         {
-          "path": "aqi-monitor-esp32/aqi-monitor-esp32.bin",
+          "path": "aqi-monitor-devkit-esp32/aqi-monitor-devkit-esp32.bin",
           "offset": 0
         }
       ]
