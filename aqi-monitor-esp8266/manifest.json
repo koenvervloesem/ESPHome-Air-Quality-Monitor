@@ -1,0 +1,9 @@
+{
+  "chipFamily": "ESP8266",
+  "parts": [
+    {
+      "path": "aqi-monitor-esp8266/aqi-monitor-esp8266.bin",
+      "offset": 0
+    }
+  ]
+}
