@@ -143,6 +143,12 @@ After you have added your device to Home Assistant's ESPHome integration, the ai
 
 If you successfully created a configuration for another ESP8266 or ESP32 board, please contribute this configuration with a `pull request <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/pulls>`_.
 
+**********************
+Web-based installation
+**********************
+
+If you have built one of the above three example configurations with exactly the same pinout and the same ESP32/ESP8266 modules, you can install the latest version of the firmware on your air quality monitor from our [installation page](https://koenvervloesem.github.io/ESPHome-Air-Quality-Monitor/) via USB, as well as setting up Wi-Fi and adding the device to Home Assistant. This requires a web browser that supports [Web Serial](https://caniuse.com/web-serial) (which is a recent Chrome, Edge or Opera).
+
 **************
 Customizations
 **************
