@@ -1,5 +1,6 @@
 # Example configuration for an ESP32-DevKitC V4
 substitutions:
+  node_name: aqi-monitor-devkit
   i2c_pin_scl: GPIO21
   i2c_pin_sda: GPIO22
   bme280_i2c_address: "0x76"

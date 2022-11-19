@@ -2,7 +2,6 @@
 
 # These are the AQI threshold values and messages. Adapt to your needs.
 substitutions:
-  node_name: aqi-monitor
   aqi_co2_max_good: "800"
   aqi_co2_max_acceptable: "1200"
   aqi_pm2_5_avg_24h_max_good: "12"

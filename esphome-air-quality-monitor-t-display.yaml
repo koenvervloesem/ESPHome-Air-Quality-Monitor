@@ -1,5 +1,6 @@
 # Example configuration for a TTGO T-Display ESP32
 substitutions:
+  node_name: aqi-monitor-tdisplay
   i2c_pin_scl: GPIO21
   i2c_pin_sda: GPIO22
   bme280_i2c_address: "0x76"

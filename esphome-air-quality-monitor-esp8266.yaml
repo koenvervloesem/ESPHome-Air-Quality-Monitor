@@ -1,5 +1,6 @@
 # Example configuration for a NodeMCU v2 ESP8266 development board
 substitutions:
+  node_name: aqi-monitor-nodemcu
   i2c_pin_scl: D1
   i2c_pin_sda: D2
   bme280_i2c_address: "0x76"
