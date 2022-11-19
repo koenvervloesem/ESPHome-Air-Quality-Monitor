@@ -13,6 +13,7 @@ jobs:
       files: esphome-air-quality-monitor-esp8266.yaml
       name: ESPHome Air Quality Monitor for ESP8266
       manifest_filename: air-quality-monitor-esp8266-manifest.json
+      clean: false
   publish-esp32:
     name: Publish firmware for ESP32
     uses: esphome/workflows/.github/workflows/publish.yml@main
@@ -20,6 +21,7 @@ jobs:
       files: esphome-air-quality-monitor-esp32.yaml
       name: ESPHome Air Quality Monitor for ESP32
       manifest_filename: air-quality-monitor-esp32-manifest.json
+      clean: false
   publish-t-display:
     name: Publish firmware for T-Display
     uses: esphome/workflows/.github/workflows/publish.yml@main
@@ -27,3 +29,4 @@ jobs:
       files: esphome-air-quality-monitor-t-display.yaml
       name: ESPHome Air Quality Monitor for T-Display
       manifest_filename: air-quality-monitor-t-display-manifest.json
+      clean: false
