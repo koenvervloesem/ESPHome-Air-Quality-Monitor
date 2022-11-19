@@ -1,14 +1,14 @@
 {
-  "name": "ESPHome Air Quality Monitor for ESP8266",
+  "name": "ESPHome Air Quality Monitor for ESP32",
   "version": "",
   "home_assistant_domain": "esphome",
   "new_install_skip_erase": false,
   "builds": [
     {
-      "chipFamily": "ESP8266",
+      "chipFamily": "ESP32",
       "parts": [
         {
-          "path": "aqi-monitor-esp8266/aqi-monitor-esp8266.bin",
+          "path": "aqi-monitor-esp32/aqi-monitor-esp32.bin",
           "offset": 0
         }
       ]
