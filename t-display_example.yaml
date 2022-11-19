@@ -73,6 +73,7 @@ spi:
 # yamllint disable rule:line-length
 display:
   - platform: st7789v
+    model: TTGO TDisplay 135x240
     id: ttgo_tdisplay
     backlight_pin: GPIO4
     cs_pin: GPIO5

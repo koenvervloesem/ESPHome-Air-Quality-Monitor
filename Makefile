@@ -1,13 +1,9 @@
-BUILD_DIR = build
 YAML_FILES = *_example.yaml
 
-.PHONY: build clean lint requirements
+.PHONY: build lint requirements
 
 build:
 	esphome compile $(YAML_FILES)
-
-clean:
-	rm -r $(BUILD_DIR)
 
 lint:
 	yamllint .

@@ -1,3 +1,3 @@
-esphome==2022.6.0
-Pillow==9.0.1
+esphome==2022.11.0
+Pillow==9.3.0
 yamllint==1.26.0

@@ -30,7 +30,6 @@ esphome:
   name: ${node_name}
   platform: ${node_platform}
   board: ${node_board}
-  build_path: ./build/${node_name}
 
 wifi:
   ssid: !secret wifi_ssid
