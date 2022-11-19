@@ -1,35 +1,22 @@
 ---
 name: Build
 
-on:
-  pull_request:
-    paths:
-      - '.github/workflows/**'
-      - 'common/**'
-      - 'include/**'
-      - '*_example.yaml'
-      - 'requirements.txt'
-  push:
-    paths:
-      - '.github/workflows/**'
-      - 'common/**'
-      - 'include/**'
-      - '*_example.yaml'
-      - 'requirements.txt'
+on: [push, pull_request]
 
 jobs:
-  test:
+  build:
+    name: Building ${{ matrix.file }}
     runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        file:
+          - esphome-air-quality-monitor-esp32.yaml
+          - esphome-air-quality-monitor-esp8266.yaml
+          - esphome-air-quality-monitor-t-display.yaml
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
-      - name: Install setuptools
-        run: sudo apt install python3-setuptools
-      - name: Install requirements
-        run: sudo make requirements
-      - name: Lint YAML files
-        run: |
-          cp common/secrets.yaml.example common/secrets.yaml
-          make lint
-      - name: Build code
-        run: make build
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Build ESPHome firmware to verify configuration
+        uses: esphome/build-action@v1.5.0
+        with:
+          yaml_file: ${{ matrix.file }}

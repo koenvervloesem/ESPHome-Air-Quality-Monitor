@@ -115,8 +115,6 @@ This is a modular ESPHome configuration split up in various YAML files that you 
   Sets up the RGB LED on the ESP8266 with software PWM.
 `sds011.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/sds011.yaml>`_
   Sets up the SDS011 PM sensor.
-`secrets.yaml.example <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/secrets.yaml.example>`_
-  Contains the secrets used in this ESPHome project. Copy this file to a file ``secrets.yaml`` in the ``common`` directory and enter your Wi-Fi, API and OTA credentials.
 `t6615.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/common/t6615.yaml>`_
   Sets up the T6615 CO₂ sensor, which doesn't need calibration.
 
@@ -131,15 +129,15 @@ To use this configuration, create a YAML file with:
 
 There are three example configurations in this repository:
 
-- `esp8266_example.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/esp8266_example.yaml>`_ for the NodeMCU v2 ESP8266
-- `esp32_example.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/esp32_example.yaml>`_ for the ESP32-DevKitC V4
-- `t-display_example.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/t-display_example.yaml>`_ for the TTGO T-Display ESP32
+- `esphome-air-quality-monitor-esp8266.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/esphome-air-quality-monitor-esp8266.yaml>`_ for the NodeMCU v2 ESP8266
+- `esphome-air-quality-monitor-esp32.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/esphome-air-quality-monitor-esp32.yaml>`_ for the ESP32-DevKitC V4
+- `esphome-air-quality-monitor-t-display.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/esphome-air-quality-monitor-t-display.yaml>`_ for the TTGO T-Display ESP32
 
 After this, flash the firmware to your device, e.g. with:
 
 .. code-block:: console
 
-  esphome run esp32_example.yaml
+  esphome run esphome-air-quality-monitor-esp32.yaml
 
 After you have added your device to Home Assistant's ESPHome integration, the air quality measurements are available in Home Assistant and you can start the calibration of the CO₂ sensor from within Home Assistant too (or with the top button on the TTGO T-Display ESP32).
 

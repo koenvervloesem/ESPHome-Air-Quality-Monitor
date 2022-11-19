@@ -1,4 +1,4 @@
-YAML_FILES = *_example.yaml
+YAML_FILES = esphome-air-quality-monitor-*.yaml
 
 .PHONY: build lint requirements
 

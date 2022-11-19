@@ -4,5 +4,3 @@
 **/lib/
 **/src/
 **/platformio.ini
-common/secrets.yaml
-build/

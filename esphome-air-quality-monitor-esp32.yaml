@@ -1,8 +1,5 @@
 # Example configuration for an ESP32-DevKitC V4
 substitutions:
-  node_name: esp32-example
-  node_platform: ESP32
-  node_board: esp32dev
   i2c_pin_scl: GPIO21
   i2c_pin_sda: GPIO22
   bme280_i2c_address: "0x76"
@@ -26,6 +23,19 @@ esphome:
     board: az-delivery-devkit-v4
     board_build.mcu: esp32
     board_build.f_cpu: 240000000L
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+dashboard_import:
+  package_import_url: github://koenvervloesem/ESPHome-Air-Quality-Monitor/esphome-air-quality-monitor-esp32.yaml@main
+
+# Sets up Bluetooth LE to allow the user
+# to provision Wi-Fi credentials to the device.
+esp32_improv:
+  authorizer: none
 
 packages:
   base: !include common/base.yaml

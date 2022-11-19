@@ -1,8 +1,5 @@
 # Example configuration for a NodeMCU v2 ESP8266 development board
 substitutions:
-  node_name: esp8266-example
-  node_platform: ESP8266
-  node_board: nodemcuv2
   i2c_pin_scl: D1
   i2c_pin_sda: D2
   bme280_i2c_address: "0x76"
@@ -19,6 +16,12 @@ substitutions:
   led_pin_green: D8
   led_pin_blue: TX
 
+esp8266:
+  board: nodemcuv2
+
+dashboard_import:
+  package_import_url: github://koenvervloesem/ESPHome-Air-Quality-Monitor/esphome-air-quality-monitor-esp8266.yaml@main
+
 packages:
   base: !include common/base.yaml
   bme280: !include common/bme280.yaml
@@ -28,6 +31,3 @@ packages:
   show_calibration: !include common/rgb_led/calibration.yaml
   show_aqi: !include common/rgb_led/aqi.yaml
   aqi: !include common/aqi.yaml
-
-logger:
-  baud_rate: 0

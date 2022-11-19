@@ -1,8 +1,5 @@
 # Example configuration for a TTGO T-Display ESP32
 substitutions:
-  node_name: tdisplay-example
-  node_platform: ESP32
-  node_board: featheresp32
   i2c_pin_scl: GPIO21
   i2c_pin_sda: GPIO22
   bme280_i2c_address: "0x76"
@@ -17,6 +14,23 @@ substitutions:
   graph_width: "240"
   graph_height: "75"
 
+esphome:
+  includes:
+    - include/display_utilities.h
+
+esp32:
+  board: featheresp32
+  framework:
+    type: arduino
+
+# Sets up Bluetooth LE to allow the user
+# to provision Wi-Fi credentials to the device.
+esp32_improv:
+  authorizer: none
+
+dashboard_import:
+  package_import_url: github://koenvervloesem/ESPHome-Air-Quality-Monitor/esphome-air-quality-monitor-t-display.yaml@main
+
 packages:
   base: !include common/base.yaml
   bme280: !include common/bme280.yaml
@@ -26,10 +40,6 @@ packages:
   no_aqi: !include common/no_feedback/aqi.yaml
   no_calibration: !include common/no_feedback/calibration.yaml
   display: !include common/display.yaml
-
-esphome:
-  includes:
-    - include/display_utilities.h
 
 binary_sensor:
   - platform: status
