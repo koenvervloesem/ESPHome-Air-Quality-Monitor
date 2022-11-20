@@ -26,8 +26,10 @@ esp32:
 
 # Sets up Bluetooth LE to allow the user
 # to provision Wi-Fi credentials to the device.
-esp32_improv:
-  authorizer: none
+# TODO: Disable this for now, as it results in Wi-Fi not being set up.
+# Error: "create wifi task: failed to create task"
+#esp32_improv:
+#  authorizer: none
 
 dashboard_import:
   package_import_url: github://koenvervloesem/ESPHome-Air-Quality-Monitor/esphome-air-quality-monitor-t-display.yaml@main

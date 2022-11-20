@@ -33,8 +33,10 @@ dashboard_import:
 
 # Sets up Bluetooth LE to allow the user
 # to provision Wi-Fi credentials to the device.
-esp32_improv:
-  authorizer: none
+# TODO: Disable this for now, as it results in Wi-Fi not being set up.
+# Error: "create wifi task: failed to create task"
+#esp32_improv:
+#  authorizer: none
 
 packages:
   base: !include common/base.yaml
