@@ -129,9 +129,9 @@ To use this configuration, create a YAML file with:
 
 There are three example configurations in this repository:
 
-- `esphome-air-quality-monitor-esp8266.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/esphome-air-quality-monitor-esp8266.yaml>`_ for the NodeMCU v2 ESP8266
-- `esphome-air-quality-monitor-esp32.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/esphome-air-quality-monitor-esp32.yaml>`_ for the ESP32-DevKitC V4
-- `esphome-air-quality-monitor-t-display.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/esphome-air-quality-monitor-t-display.yaml>`_ for the TTGO T-Display ESP32
+- `esphome-air-quality-monitor-esp8266.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/esphome-air-quality-monitor-esp8266.yaml>`_ for the NodeMCU v2 ESP8266 with MH-Z19B
+- `esphome-air-quality-monitor-esp32.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/esphome-air-quality-monitor-esp32.yaml>`_ for the ESP32-DevKitC V4 with MH-Z19B
+- `esphome-air-quality-monitor-t-display.yaml <https://github.com/koenvervloesem/ESPHome-Air-Quality-Monitor/blob/main/esphome-air-quality-monitor-t-display.yaml>`_ for the TTGO T-Display ESP32 with T6615
 
 After this, flash the firmware to your device, e.g. with:
 
